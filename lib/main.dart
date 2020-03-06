@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:tinycolor/tinycolor.dart';
 
 void main() => runApp(MyApp());
 
@@ -118,6 +119,10 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Color _getTextColor(Color color) {
+    return TinyColor(color).isDark() ? Colors.white : Colors.black;
+  }
+
   void _changeBeginColor() {
     _changeColor((value) {
       setState(() {
@@ -150,7 +155,12 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 40,
               child: RaisedButton(
                 color: _begin,
-                child: Text('begin: $_begin'),
+                child: Text(
+                  'begin: $_begin',
+                  style: TextStyle(
+                    color: _getTextColor(_begin),
+                  ),
+                ),
                 onPressed: _changeBeginColor,
               ),
             ),
@@ -159,7 +169,12 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 40,
               child: RaisedButton(
                 color: _end,
-                child: Text('end: $_end'),
+                child: Text(
+                  'end: $_end',
+                  style: TextStyle(
+                    color: _getTextColor(_end),
+                  ),
+                ),
                 onPressed: _changeEndColor,
               ),
             ),
@@ -184,7 +199,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   return Container(
                     color: _color.value,
                     child: ListTile(
-                      title: Text('${_color.key} → ${_color.value}'),
+                      title: Text(
+                        '${_color.key} → ${_color.value}',
+                        style: TextStyle(
+                          color: _getTextColor(_color.value),
+                        ),
+                      ),
                     ),
                   );
                 },
