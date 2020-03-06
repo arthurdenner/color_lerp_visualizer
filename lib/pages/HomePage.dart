@@ -129,14 +129,11 @@ class _HomePageState extends State<HomePage> {
                 type: _type,
               ),
               SizedBox(height: 8),
-              Padding(
-                padding: EdgeInsets.only(top: 0),
-                child: Slider.adaptive(
-                  divisions: 100,
-                  label: '$_gap',
-                  onChanged: _onChangeGap,
-                  value: _gap,
-                ),
+              Slider.adaptive(
+                divisions: 100,
+                label: '$_gap',
+                onChanged: _onChangeGap,
+                value: _gap,
               ),
               ColorLerps(
                 begin: _begin,

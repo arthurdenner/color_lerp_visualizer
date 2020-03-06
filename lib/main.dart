@@ -13,6 +13,13 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           color: Colors.black54,
         ),
+        buttonTheme: ButtonThemeData(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(4),
+            ),
+          ),
+        ),
         primarySwatch: Colors.grey,
         primaryTextTheme: TextTheme(
           headline6: TextStyle(

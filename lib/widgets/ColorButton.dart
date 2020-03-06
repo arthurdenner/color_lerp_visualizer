@@ -69,7 +69,7 @@ class ColorButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 48,
       child: RaisedButton(
         color: color,
         child: ColorText(

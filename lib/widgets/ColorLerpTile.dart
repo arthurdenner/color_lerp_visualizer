@@ -13,8 +13,9 @@ class ColorLerpTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Card(
       color: color.value,
+      margin: EdgeInsets.zero,
       child: ListTile(
         dense: true,
         title: ColorText(
