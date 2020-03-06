@@ -43,39 +43,56 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+double formatDouble(double value) {
+  return double.parse(value.toStringAsFixed(2));
+}
+
 class _MyHomePageState extends State<MyHomePage> {
   Color _begin = Colors.green;
   Color _end = Colors.orange;
-  double _gap = .1;
-  List<EntryColor> _colors = [];
+  double _gap = 0.25;
 
-  @override
-  void initState() {
-    super.initState();
-    _computeColors();
-  }
+  List<EntryColor> _computeColors() {
+    List<EntryColor> _colors = [];
 
-  void _computeColors() {
-    List<EntryColor> _newColors = [];
+    _colors.add(
+      EntryColor(
+        key: 'Color.lerp(begin, end, 0.0)',
+        value: Color.lerp(_begin, _end, 0),
+      ),
+    );
 
-    for (var i = 0.0; i <= 1; i += _gap) {
-      final _t = i.toStringAsFixed(2);
-
-      _newColors.add(
+    for (var _t = _gap; _t < 1; _t = formatDouble(_t + _gap)) {
+      _colors.add(
         EntryColor(
           key: 'Color.lerp(begin, end, $_t)',
-          value: Color.lerp(_begin, _end, double.parse(_t)),
+          value: Color.lerp(_begin, _end, _t),
         ),
       );
     }
 
-    setState(() {
-      _colors = _newColors;
-    });
+    _colors.add(
+      EntryColor(
+        key: 'Color.lerp(begin, end, 1.0)',
+        value: Color.lerp(_begin, _end, 1),
+      ),
+    );
+
+    return _colors;
+  }
+
+  void _onChangeGap(double value) {
+    if (value == 0) {
+      return;
+    }
+
+    setState(() => _gap = value);
   }
 
   @override
   Widget build(BuildContext context) {
+    final _colors = _computeColors();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -83,10 +100,19 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 56),
+              child: Slider.adaptive(
+                divisions: 100,
+                label: '$_gap',
+                onChanged: _onChangeGap,
+                value: _gap,
+              ),
+            ),
             Expanded(
               child: ListView.separated(
-                padding: EdgeInsets.symmetric(vertical: 8),
                 itemCount: _colors.length,
+                padding: EdgeInsets.only(bottom: 8),
                 separatorBuilder: (_, __) => SizedBox(height: 8),
                 itemBuilder: (_, index) {
                   final _color = _colors[index];
