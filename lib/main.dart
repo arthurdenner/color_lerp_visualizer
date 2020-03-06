@@ -1,18 +1,9 @@
+import 'package:color_lerp_visualizer/models/EntryColor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:tinycolor/tinycolor.dart';
 
 void main() => runApp(MyApp());
-
-class EntryColor {
-  EntryColor({
-    @required this.key,
-    @required this.value,
-  });
-
-  final String key;
-  final Color value;
-}
 
 class MyApp extends StatelessWidget {
   @override
