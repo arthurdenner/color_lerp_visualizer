@@ -65,6 +65,7 @@ class ColorLerps extends StatelessWidget {
           return Container(
             color: _color.value,
             child: ListTile(
+              dense: true,
               title: ColorText(
                 color: _color.value,
                 text: '${_color.key} → ${_color.value}',

@@ -21,9 +21,12 @@ class ColorText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(
-        color: _getTextColor(color),
-      ),
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.button.merge(
+            TextStyle(
+              color: _getTextColor(color),
+            ),
+          ),
     );
   }
 }
