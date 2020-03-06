@@ -81,20 +81,26 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: ListView.separated(
-          padding: EdgeInsets.symmetric(vertical: 8),
-          itemCount: _colors.length,
-          separatorBuilder: (_, __) => SizedBox(height: 8),
-          itemBuilder: (_, index) {
-            final _color = _colors[index];
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: ListView.separated(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                itemCount: _colors.length,
+                separatorBuilder: (_, __) => SizedBox(height: 8),
+                itemBuilder: (_, index) {
+                  final _color = _colors[index];
 
-            return Container(
-              color: _color.value,
-              child: ListTile(
-                title: Text('${_color.key} → ${_color.value}'),
+                  return Container(
+                    color: _color.value,
+                    child: ListTile(
+                      title: Text('${_color.key} → ${_color.value}'),
+                    ),
+                  );
+                },
               ),
-            );
-          },
+            ),
+          ],
         ),
       ),
     );
