@@ -39,6 +39,9 @@ class PickerTypeSwitch extends StatelessWidget {
       value: value,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 8),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.transparent),
+        ),
         labelText: 'Type of the color picker',
       ),
     );

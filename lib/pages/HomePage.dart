@@ -9,8 +9,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Color _begin = Colors.green;
-  Color _end = Colors.orange;
+  Color _begin = Colors.white;
+  Color _end = Colors.black;
   double _gap = 0.25;
   PickerType _type = PickerType.DEFAULT;
 
