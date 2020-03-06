@@ -1,5 +1,6 @@
 import 'package:color_lerp_visualizer/widgets/ColorButton.dart';
 import 'package:color_lerp_visualizer/widgets/ColorLerps.dart';
+import 'package:color_lerp_visualizer/widgets/PickerTypeSwitch.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,6 +12,7 @@ class _HomePageState extends State<HomePage> {
   Color _begin = Colors.green;
   Color _end = Colors.orange;
   double _gap = 0.25;
+  PickerType _type = PickerType.DEFAULT;
 
   void _onChangeGap(double value) {
     if (value == 0) {
@@ -28,6 +30,10 @@ class _HomePageState extends State<HomePage> {
     setState(() => _end = value);
   }
 
+  void _changePickerType(PickerType value) {
+    setState(() => _type = value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,16 +46,22 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              PickerTypeSwitch(
+                onChanged: _changePickerType,
+                value: _type,
+              ),
               ColorButton(
                 color: _begin,
                 onColorChanged: _changeBeginColor,
                 text: 'begin: $_begin',
+                type: _type,
               ),
               SizedBox(height: 8),
               ColorButton(
                 color: _end,
                 onColorChanged: _changeEndColor,
                 text: 'end: $_end',
+                type: _type,
               ),
               SizedBox(height: 8),
               Padding(
