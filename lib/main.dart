@@ -1,7 +1,7 @@
 import 'package:color_lerp_visualizer/models/EntryColor.dart';
+import 'package:color_lerp_visualizer/widgets/ColorButton.dart';
 import 'package:color_lerp_visualizer/widgets/ColorText.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 void main() => runApp(MyApp());
 
@@ -82,40 +82,12 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() => _gap = value);
   }
 
-  void _changeColor(void Function(Color) onColorChanged) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          titlePadding: const EdgeInsets.all(0.0),
-          contentPadding: const EdgeInsets.all(0.0),
-          content: SingleChildScrollView(
-            child: ColorPicker(
-              pickerColor: _begin,
-              onColorChanged: onColorChanged,
-              colorPickerWidth: 300.0,
-              pickerAreaHeightPercent: 0.7,
-              enableAlpha: true,
-              displayThumbColor: true,
-              showLabel: true,
-              paletteType: PaletteType.hsv,
-              pickerAreaBorderRadius: const BorderRadius.only(
-                topLeft: const Radius.circular(2.0),
-                topRight: const Radius.circular(2.0),
-              ),
-            ),
-          ),
-        );
-      },
-    );
+  void _changeBeginColor(Color value) {
+    setState(() => _begin = value);
   }
 
-  void _changeBeginColor() {
-    _changeColor((value) => setState(() => _begin = value));
-  }
-
-  void _changeEndColor() {
-    _changeColor((value) => setState(() => _end = value));
+  void _changeEndColor(Color value) {
+    setState(() => _end = value);
   }
 
   @override
@@ -130,28 +102,16 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: <Widget>[
             SizedBox(height: 8),
-            SizedBox(
-              height: 40,
-              child: RaisedButton(
-                color: _begin,
-                child: ColorText(
-                  color: _begin,
-                  text: 'begin: $_begin',
-                ),
-                onPressed: _changeBeginColor,
-              ),
+            ColorButton(
+              color: _begin,
+              onColorChanged: _changeBeginColor,
+              text: 'begin: $_begin',
             ),
             SizedBox(height: 8),
-            SizedBox(
-              height: 40,
-              child: RaisedButton(
-                color: _end,
-                child: ColorText(
-                  color: _end,
-                  text: 'end: $_end',
-                ),
-                onPressed: _changeEndColor,
-              ),
+            ColorButton(
+              color: _end,
+              onColorChanged: _changeEndColor,
+              text: 'end: $_end',
             ),
             SizedBox(height: 8),
             Padding(
