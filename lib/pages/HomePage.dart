@@ -1,6 +1,7 @@
 import 'package:color_lerp_visualizer/utils/Debouncer.dart';
 import 'package:color_lerp_visualizer/widgets/ColorButton.dart';
 import 'package:color_lerp_visualizer/widgets/ColorLerps.dart';
+import 'package:color_lerp_visualizer/widgets/Footer.dart';
 import 'package:color_lerp_visualizer/widgets/PickerTypeSwitch.dart';
 import 'package:flutter/material.dart';
 import 'package:undo/undo.dart';
@@ -101,6 +102,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Footer(),
       appBar: AppBar(
         actions: _buildActions(),
         title: Text('Color.lerp visualizer'),
