@@ -1,5 +1,5 @@
 import 'package:color_lerp_visualizer/models/EntryColor.dart';
-import 'package:color_lerp_visualizer/widgets/ColorText.dart';
+import 'package:color_lerp_visualizer/widgets/ColorLerpTile.dart';
 import 'package:flutter/material.dart';
 
 double formatDouble(double value) {
@@ -59,20 +59,7 @@ class ColorLerps extends StatelessWidget {
         itemCount: _colors.length,
         padding: EdgeInsets.only(bottom: 8),
         separatorBuilder: (_, __) => SizedBox(height: 8),
-        itemBuilder: (_, index) {
-          final _color = _colors[index];
-
-          return Container(
-            color: _color.value,
-            child: ListTile(
-              dense: true,
-              title: ColorText(
-                color: _color.value,
-                text: '${_color.key} → ${_color.value}',
-              ),
-            ),
-          );
-        },
+        itemBuilder: (_, idx) => ColorLerpTile(color: _colors[idx]),
       ),
     );
   }
