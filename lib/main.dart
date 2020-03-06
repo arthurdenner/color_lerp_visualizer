@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 void main() => runApp(MyApp());
 
@@ -89,6 +90,50 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() => _gap = value);
   }
 
+  void _changeColor(void Function(Color) onColorChanged) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          titlePadding: const EdgeInsets.all(0.0),
+          contentPadding: const EdgeInsets.all(0.0),
+          content: SingleChildScrollView(
+            child: ColorPicker(
+              pickerColor: _begin,
+              onColorChanged: onColorChanged,
+              colorPickerWidth: 300.0,
+              pickerAreaHeightPercent: 0.7,
+              enableAlpha: true,
+              displayThumbColor: true,
+              showLabel: true,
+              paletteType: PaletteType.hsv,
+              pickerAreaBorderRadius: const BorderRadius.only(
+                topLeft: const Radius.circular(2.0),
+                topRight: const Radius.circular(2.0),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _changeBeginColor() {
+    _changeColor((value) {
+      setState(() {
+        _begin = value;
+      });
+    });
+  }
+
+  void _changeEndColor() {
+    _changeColor((value) {
+      setState(() {
+        _end = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final _colors = _computeColors();
@@ -100,8 +145,27 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           children: <Widget>[
+            SizedBox(height: 8),
+            SizedBox(
+              height: 40,
+              child: RaisedButton(
+                color: _begin,
+                child: Text('begin: $_begin'),
+                onPressed: _changeBeginColor,
+              ),
+            ),
+            SizedBox(height: 8),
+            SizedBox(
+              height: 40,
+              child: RaisedButton(
+                color: _end,
+                child: Text('end: $_end'),
+                onPressed: _changeEndColor,
+              ),
+            ),
+            SizedBox(height: 8),
             Padding(
-              padding: EdgeInsets.only(top: 56),
+              padding: EdgeInsets.only(top: 0),
               child: Slider.adaptive(
                 divisions: 100,
                 label: '$_gap',
